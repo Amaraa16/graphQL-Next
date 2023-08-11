@@ -7,6 +7,7 @@ const typeDefs = `#graphql
     text: String
     userId: String
     createdAt: String
+    _id: ID
   }
 
   type Query {
@@ -21,7 +22,7 @@ const typeDefs = `#graphql
   type Mutation {
     createPost(PostCreateInput: PostInput!): Post,
     updatePost(id: ID!, PostUpdateInput: PostInput!): Post,
-    deletePost(id: ID!): Boolean
+    deletePost(id: ID!): String
   }
 `;
 
@@ -61,7 +62,7 @@ const resolvers = {
         filter: { _id: { $oid: args.id } },
       });
 
-      return deletePost;
+      return "deleted";
     },
   },
 };
